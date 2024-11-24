@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivia Quiz Game</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="game-title">Trivia Quiz Game</h1>
+
+        <div class="setup-screen">
+            <select class="category-select">
+                <option value="">Select Category</option>
+                <option value="9">General Knowledge</option>
+                <option value="21">Sports</option>
+                <option value="23">History</option>
+                <option value="17">Science & Nature</option>
+            </select>
+
+            <select class="difficulty-select">
+                <option value="">Select Difficulty</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+
+            <button class="btn start-btn">Start Quiz</button>
+        </div>
+
+        <div class="quiz-screen">
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+
+            <div class="question"></div>
+            <div class="options"></div>
+        </div>
+
+        <div class="results-screen">
+            <h2>Quiz Complete!</h2>
+            <div class="score"></div>
+            <div class="stats">
+                <div class="stat-item">
+                    <h3>Total Questions</h3>
+                    <p class="total-questions"></p>
+                </div>
+                <div class="stat-item">
+                    <h3>Correct Answers</h3>
+                    <p class="correct-answers"></p>
+                </div>
+                <div class="stat-item">
+                    <h3>Accuracy</h3>
+                    <p class="accuracy"></p>
+                </div>
+            </div>
+            <button class="btn restart-btn">Play Again</button>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>
