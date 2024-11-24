@@ -14,6 +14,16 @@ class Game {
                 this.handleAnswer(e.target);
             }
         });
+        document.querySelector('.start-btn').addEventListener('click', async() => {
+            if (uiManager.showQuizScreen()) { // Only proceed if validation passes
+                const category = uiManager.categorySelect.value;
+                const difficulty = uiManager.difficultySelect.value;
+                const success = await quizManager.initializeQuiz(category, difficulty);
+                if (success) {
+                    uiManager.displayQuestion(quizManager.getCurrentQuestion());
+                }
+            }
+        });
     }
 
     async startGame() {

@@ -8,6 +8,62 @@ class UIManager {
         this.questionElement = document.querySelector('.question');
         this.optionsElement = document.querySelector('.options');
         this.progressElement = document.querySelector('.progress');
+
+        // Update selectors to match your HTML classes
+        this.categorySelect = document.querySelector('.category-select');
+        this.difficultySelect = document.querySelector('.difficulty-select');
+        this.startButton = document.querySelector('.start-btn');
+        this.errorMessage = document.createElement('div');
+        this.initializeErrorMessage();
+    }
+
+    initializeErrorMessage() {
+        this.errorMessage.className = 'error-message';
+        this.errorMessage.style.cssText = `
+            color: red;
+            margin-top: 10px;
+            display: none;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+        `;
+        this.startButton.parentNode.insertBefore(this.errorMessage, this.startButton.nextSibling);
+    }
+
+    validateSelections() {
+        const category = this.categorySelect.value;
+        const difficulty = this.difficultySelect.value;
+
+        if (!category || !difficulty) {
+            this.showError('Please select both category and difficulty before starting the quiz.');
+            return false;
+        }
+
+        this.hideError();
+        return true;
+    }
+
+    showError(message) {
+        this.errorMessage.textContent = message;
+        this.errorMessage.style.display = 'block';
+
+        // Add visual feedback to dropdowns
+        if (!this.categorySelect.value) {
+            this.categorySelect.style.borderColor = 'red';
+            this.categorySelect.style.boxShadow = '0 0 5px rgba(255, 0, 0, 0.5)';
+        }
+        if (!this.difficultySelect.value) {
+            this.difficultySelect.style.borderColor = 'red';
+            this.difficultySelect.style.boxShadow = '0 0 5px rgba(255, 0, 0, 0.5)';
+        }
+    }
+
+    hideError() {
+        this.errorMessage.style.display = 'none';
+        this.categorySelect.style.borderColor = '';
+        this.categorySelect.style.boxShadow = '';
+        this.difficultySelect.style.borderColor = '';
+        this.difficultySelect.style.boxShadow = '';
     }
 
     showSetupScreen() {
@@ -15,12 +71,17 @@ class UIManager {
         this.quizScreen.style.display = 'none';
         this.resultsScreen.style.display = 'none';
         this.progressElement.style.width = '0%';
+        this.hideError(); // Reset error state when returning to setup
     }
 
     showQuizScreen() {
+        if (!this.validateSelections()) {
+            return false;
+        }
         this.setupScreen.style.display = 'none';
         this.quizScreen.style.display = 'block';
         this.resultsScreen.style.display = 'none';
+        return true;
     }
 
     showResultsScreen(results) {
