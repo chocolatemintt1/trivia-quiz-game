@@ -7,13 +7,6 @@ class Game {
     }
 
     setupEventListeners() {
-        document.querySelector('.start-btn').addEventListener('click', () => this.startGame());
-        document.querySelector('.restart-btn').addEventListener('click', () => this.restartGame());
-        document.querySelector('.options').addEventListener('click', (e) => {
-            if (e.target.classList.contains('option')) {
-                this.handleAnswer(e.target);
-            }
-        });
         document.querySelector('.start-btn').addEventListener('click', async() => {
             if (uiManager.showQuizScreen()) { // Only proceed if validation passes
                 const category = uiManager.categorySelect.value;
@@ -22,6 +15,12 @@ class Game {
                 if (success) {
                     uiManager.displayQuestion(quizManager.getCurrentQuestion());
                 }
+            }
+        });
+        document.querySelector('.restart-btn').addEventListener('click', () => this.restartGame());
+        document.querySelector('.options').addEventListener('click', (e) => {
+            if (e.target.classList.contains('option')) {
+                this.handleAnswer(e.target);
             }
         });
     }
